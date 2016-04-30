@@ -7,56 +7,39 @@ import javax.faces.context.FacesContext;
 
 import org.apache.commons.lang3.StringUtils;
 
+import br.com.sisnema.financeiroweb.model.Usuario;
+
 @ManagedBean
 @RequestScoped
 public class UsuarioBean {
 
-	private String nome;
-	private String email;
-	private String senha;
+	private Usuario usuario;
 	private String confirmaSenha;
 
-	
-	public String novo(){
+	public String novo() {
+		usuario = new Usuario();
+		usuario.setAtivo(true);
 		return "usuario";
 	}
-	
-	public String salvar(){
 
-		if(!StringUtils.equals(senha, confirmaSenha)){
-			
-			FacesContext.getCurrentInstance().addMessage(null, 
-							new FacesMessage( FacesMessage.SEVERITY_ERROR, 
-											  "Senhas diferentes",""));
+	public String salvar() {
+
+		if (!StringUtils.equals(usuario.getSenha(), confirmaSenha)) {
+
+			FacesContext.getCurrentInstance().addMessage(null,
+					new FacesMessage(FacesMessage.SEVERITY_ERROR, "Senhas diferentes", ""));
 			return null;
 		}
-		
+
 		return "usuarioSucesso";
 	}
-	
-	
-	public String getNome() {
-		return nome;
+
+	public Usuario getUsuario() {
+		return usuario;
 	}
 
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
-
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
-	public String getSenha() {
-		return senha;
-	}
-
-	public void setSenha(String senha) {
-		this.senha = senha;
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
 	}
 
 	public String getConfirmaSenha() {
