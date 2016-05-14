@@ -23,6 +23,10 @@
 		<param-value>Development</param-value>
 	</context-param>
 	
+	 <context-param>
+       <param-name>javax.faces.DATETIMECONVERTER_DEFAULT_TIMEZONE_IS_SYSTEM_TIMEZONE</param-name>   	          
+       <param-value>true</param-value>
+ 	</context-param>	
 	
 	<!-- Definição do Servlet que irá interceptar todas as requisições JSF
 		e direcionar para o seu componente (ManagedBean) -->

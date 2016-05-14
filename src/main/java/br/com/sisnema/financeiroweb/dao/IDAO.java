@@ -6,45 +6,48 @@ import br.com.sisnema.financeiroweb.exception.DAOException;
 
 /**
  * Interface que define as assinaturas padrões das DAOs do sistema
- * 
- * @param <T>
- *            - Entidade que será persistida/pesquisada
+ * @param <T> - Entidade que será persistida/pesquisada
  */
 public interface IDAO<T> {
 
 	/**
 	 * Assinatura padrão para os métodos Inserir/Alterar
-	 * 
-	 * @param model
-	 *            - entidade a ser inserida/alterada
+	 * @param model - entidade a ser inserida/alterada
 	 * @throws DAOException
 	 */
 	void salvar(T model) throws DAOException;
-
+	
 	/**
 	 * Assinatura padrão para o método Excluir
-	 * 
-	 * @param model
-	 *            - entidade a ser excluida
+	 * @param model - entidade a ser excluida
 	 * @throws DAOException
 	 */
 	void excluir(T model) throws DAOException;
-
+	
 	/**
 	 * Assinatura padrão para o que busca um registro pela PK
-	 * 
-	 * @param model
-	 *            - entidade contendo a PK populada
+	 * @param model - entidade contendo a PK populada
 	 */
 	T obterPorId(T filtro);
 
 	/**
-	 * Assinatura padrão para o que pesquisa N registros de acordo com os
-	 * filtros informados no <T> model
-	 * 
-	 * @param model
-	 *            - entidade contendo a PK populada
+	 * Assinatura padrão para o que pesquisa N registros
+	 * de acordo com os filtros informados no <T> model
+	 * @param model - entidade contendo a PK populada
 	 */
 	List<T> pesquisar(T filtros);
-
+	
 }
+
+
+
+
+
+
+
+
+
+
+
+
+

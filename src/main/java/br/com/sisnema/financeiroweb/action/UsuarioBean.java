@@ -1,20 +1,24 @@
 package br.com.sisnema.financeiroweb.action;
 
-import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
-import javax.faces.context.FacesContext;
 
 import org.apache.commons.lang3.StringUtils;
 
+import br.com.sisnema.financeiroweb.exception.RNException;
 import br.com.sisnema.financeiroweb.model.Usuario;
+import br.com.sisnema.financeiroweb.negocio.UsuarioRN;
 
 @ManagedBean
 @RequestScoped
-public class UsuarioBean {
+public class UsuarioBean extends ActionBean<Usuario> {
 
-	private Usuario usuario;
+	private Usuario usuario = new Usuario();
 	private String confirmaSenha;
+
+	public UsuarioBean() {
+		super(new UsuarioRN());
+	}
 
 	public String novo() {
 		usuario = new Usuario();
@@ -23,15 +27,19 @@ public class UsuarioBean {
 	}
 
 	public String salvar() {
-
-		if (!StringUtils.equals(usuario.getSenha(), confirmaSenha)) {
-
-			FacesContext.getCurrentInstance().addMessage(null,
-					new FacesMessage(FacesMessage.SEVERITY_ERROR, "Senhas diferentes", ""));
-			return null;
+		try {
+			if (!StringUtils.equals(usuario.getSenha(), confirmaSenha)) {
+				apresentarMensagemDeErro("Senhas diferentes");
+				return null;
+			}			
+			boolean isInsert = (usuario.getCodigo() == null);
+			negocio.salvar(usuario);			
+			apresentarMensagemDeSucesso("Usuário " + (isInsert ? "inserido" : "alterado") + "com sucesso!");
+			return "usuarioSucesso";
+		} catch (RNException e) {
+			apresentarMensagemDeErro(e);
 		}
-
-		return "usuarioSucesso";
+		return null;
 	}
 
 	public Usuario getUsuario() {

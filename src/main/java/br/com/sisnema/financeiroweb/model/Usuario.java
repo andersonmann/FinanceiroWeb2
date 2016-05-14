@@ -2,13 +2,31 @@ package br.com.sisnema.financeiroweb.model;
 
 import java.io.Serializable;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+import org.hibernate.annotations.NaturalId;
+
+@Entity
+// @Table
 public class Usuario implements Serializable {
 
-	private static final long serialVersionUID = -8359745164118178955L;
+	private static final long serialVersionUID = 8402638884150282595L;
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "cod_usuario")
 	private Integer codigo;
+
 	private String nome;
+
+	@NaturalId
 	private String login;
+
 	private String senha;
 	private String celular;
 	private String nascimento;

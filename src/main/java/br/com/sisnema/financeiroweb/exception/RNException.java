@@ -5,7 +5,6 @@ public class RNException extends Exception {
 	private static final long serialVersionUID = 2798155782546740891L;
 
 	public RNException() {
-
 	}
 
 	public RNException(String message) {
